@@ -19,6 +19,7 @@ namespace GreatWall.Event
     {
         public async Task StartAsync(IDialogContext context) // 초기화
         {
+
             
             await this.MessageReceivedAsync(context, null);
         }

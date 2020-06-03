@@ -12,7 +12,7 @@ namespace GreatWall.Model
 {
     public class WMap
     {
-        private Dictionary<String, IDialog<string>> maps = new Dictionary<string, IDialog<string>>();
+        private Dictionary<string, Type> maps = new Dictionary<string, Type>();
 
         public WMap()
         {
@@ -31,7 +31,7 @@ namespace GreatWall.Model
                         cl = strdata[1];
 
                         Type ty = Type.GetType(cl);
-                        maps.Add(command, (IDialog<string>)Activator.CreateInstance(ty));
+                        maps.Add(command, ty);
 
                         Console.WriteLine(maps.ToString());
                         
@@ -44,11 +44,11 @@ namespace GreatWall.Model
             }
         }
 
-        public object location(string loc)
+        public Type location(string loc)
         {
-            IDialog<string> ID;
+            Type ID;
             maps.TryGetValue("0,0",out ID);
-            return (object)ID;
+            return ID;
         }
     }
 }
