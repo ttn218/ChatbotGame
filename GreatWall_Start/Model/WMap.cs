@@ -10,44 +10,20 @@ using GreatWall.Event;
 
 namespace GreatWall.Model
 {
+    [Serializable]
     public class WMap
     {
-        private Dictionary<string, Type> maps = new Dictionary<string, Type>();
+        private Dictionary<string, IDialog<string>> maps = new Dictionary<string, IDialog<string>>();
 
         public WMap()
         {
-            try
-            {
-                using (StreamReader sr = new StreamReader("Map.txt"))
-                {
-                    while (!sr.EndOfStream)
-                    {
-                        string command, cl;
-                        string[] strdata;
-
-                        strdata = sr.ReadLine().Split(':');
-
-                        command = strdata[0];
-                        cl = strdata[1];
-
-                        Type ty = Type.GetType(cl);
-                        maps.Add(command, ty);
-
-                        Console.WriteLine(maps.ToString());
-                        
-                    }
-                }
-            }
-            catch
-            { 
-
-            }
+            maps.Add("0,0", new BaseEvent());
         }
 
-        public Type location(string loc)
+        public IDialog<string> location(string loc)
         {
-            Type ID;
-            maps.TryGetValue("0,0",out ID);
+            IDialog<string> ID;
+            maps.TryGetValue(loc,out ID);
             return ID;
         }
     }

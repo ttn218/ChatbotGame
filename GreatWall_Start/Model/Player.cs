@@ -5,6 +5,7 @@ using System.Web;
 
 namespace GreatWall.Model
 {
+    [Serializable]
     public class Player
     {
     }

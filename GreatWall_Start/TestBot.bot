@@ -1,0 +1,18 @@
+{
+    "name": "TestBot",
+    "description": "",
+    "services": [
+        {
+            "type": "endpoint",
+            "appId": "",
+            "appPassword": "",
+            "endpoint": "http://localhost:3984/api/messages",
+            "id": "a266a1e0-a560-11ea-bb1b-2b4a9f69863a",
+            "name": "http://localhost:3984/api/messages"
+        }
+    ],
+    "padlock": "",
+    "version": "2.0",
+    "overrides": null,
+    "path": "C:\\Users\\ttn21\\OneDrive\\문서\\GitHub\\Frozen\\GreatWall_Start\\TestBot.bot"
+}

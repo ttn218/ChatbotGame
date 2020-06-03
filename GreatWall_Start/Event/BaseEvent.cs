@@ -15,12 +15,15 @@ using GreatWall.Model;
 
 namespace GreatWall.Event
 {
+    [Serializable]
     public class BaseEvent : IDialog<string>
     {
         public async Task StartAsync(IDialogContext context) // 초기화
         {
-
+            string strMessage = "성공이다..";
             
+            await context.PostAsync(strMessage);
+
             await this.MessageReceivedAsync(context, null);
         }
         private async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)

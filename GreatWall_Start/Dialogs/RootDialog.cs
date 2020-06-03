@@ -6,7 +6,7 @@ using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
 using GreatWall.Dialogs;
 using System.Collections.Generic;
-
+using GreatWall.Model;
 
 namespace GreatWall
 {
@@ -16,7 +16,7 @@ namespace GreatWall
         protected int count = 1;
         string strMessage;
         private string strWelcomMMessage = "[Great Wall Bot]";
-        
+        WMap wMap = new WMap();
         
         public Task StartAsync(IDialogContext context)
         {
@@ -26,8 +26,6 @@ namespace GreatWall
 
         public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
         {
-
-
             var message = context.MakeMessage();
             var actions = new List<CardAction>();
 
@@ -49,7 +47,7 @@ namespace GreatWall
             if(strSelected == "1")
             {
                 
-                //context.Call(Activator.CreateInstance(), DialogResumeAfter);
+               context.Call(wMap.location("0,0"), DialogResumeAfter);
             }
             else if(strSelected == "2")
             {
