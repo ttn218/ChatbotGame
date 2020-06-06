@@ -7,20 +7,19 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Connector;
 using Microsoft.Bot.Builder.Dialogs;
 using System.Net.Http;
-using GreatWall.Helpers;
+using LionKing.Helpers;
 
 using System.Data;
 using System.Data.SqlClient;
-using GreatWall.Model;
+using LionKing.Model;
 
-namespace GreatWall.Dialogs
+namespace LionKing.Dialogs
 {
     [Serializable]
     public class OrderDialog : IDialog<string>
     {
         private string strMessage = null;
-        private string strOrder;
-        private string strServerUrl = "http://localhost:3984/Images/";
+        private string strServerUrl = "http://localhost:3984/Resource/Images/";
         private string strSQL = "SELECT * FROM Menus";
         List<OrderItem> MenuItems = new List<OrderItem>();
 

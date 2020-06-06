@@ -10,7 +10,7 @@ using System.Threading;
 using QnAMakerDialog.Models;
 using QnAMakerDialog;
 
-namespace GreatWall.Dialogs
+namespace LionKing.Dialogs
 {
     [Serializable]
     [QnAMakerService("https://greatwallqna.azurewebsites.net/qnamaker",

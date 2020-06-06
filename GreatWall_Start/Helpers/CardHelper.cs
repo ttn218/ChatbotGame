@@ -6,7 +6,7 @@ using System.Web;
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Connector;
 
-namespace GreatWall.Helpers
+namespace LionKing.Helpers
 {
     public class CardHelper
     {

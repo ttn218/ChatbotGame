@@ -6,17 +6,19 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace GreatWall.Helpers
+namespace LionKing.Helpers
 {
     public class SQLHelper
     {
-        private const string strDBServer = "Server=tcp:greatwall-db-server.database.windows.net,1433;" +
-                               "Initial Catalog=GreatWallDB;Persist Security Info=False;" +
-                                "User ID=non778;Password=asdf1245*;" +
-                                "MultipleActiveResultSets=False;" +
-                                "Encrypt=True;" +
-                                "TrustServerCertificate=False;" +
-                                "Connection Timeout=30;";
+        private const string strDBServer = "Server=tcp:greatwall-db-server1.database.windows.net,1433;" +
+                                    "Initial Catalog=GreatWallDB;" +
+                                    "Persist Security Info=False;" +
+                                    "User ID=minsu;" +
+                                    "Password=rkdzxzx123!;" +
+                                    "MultipleActiveResultSets=False;" +
+                                    "Encrypt=True;" +
+                                    "TrustServerCertificate=False;" +
+                                    "Connection Timeout=30;";
 
         public static DataSet RunSQL(string strQuery)
         {

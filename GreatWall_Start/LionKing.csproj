@@ -13,8 +13,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GreatWall</RootNamespace>
-    <AssemblyName>GreatWall</AssemblyName>
+    <RootNamespace>LionKing</RootNamespace>
+    <AssemblyName>LionKing</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
@@ -172,26 +172,29 @@
   <ItemGroup>
     <Content Include="default.htm" />
     <Content Include="Global.asax" />
-    <Content Include="Images\menu_01.jpg" />
-    <Content Include="Images\menu_02.jpg" />
-    <Content Include="Images\menu_03.jpg" />
+    <Content Include="Resource\Idioms.txt" />
+    <Content Include="Resource\Images\menu_01.jpg" />
+    <Content Include="Resource\Images\menu_02.jpg" />
+    <Content Include="Resource\Images\menu_03.jpg" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Dialogs\FAQDialog.cs" />
+    <Compile Include="Dialogs\IdiomGame\GameLoopDialog.cs" />
+    <Compile Include="Dialogs\IdiomGame\GameStartDialog.cs" />
+    <Compile Include="Dialogs\IdiomGame\IdiomGameDialog.cs" />
+    <Compile Include="Model\Idiom.cs" />
+    <Compile Include="Model\Quiz.cs" />
     <Compile Include="Dialogs\OrderDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
-    <Compile Include="Event\BaseEvent.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CardHelper.cs" />
     <Compile Include="Helpers\SQLHelper.cs" />
-    <Compile Include="Model\WMap.cs" />
     <Compile Include="Model\OrderItem.cs" />
-    <Compile Include="Model\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
