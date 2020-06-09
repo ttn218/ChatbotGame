@@ -21,6 +21,7 @@ namespace LionKing.Dialogs.IdiomGame
 
         public async Task StartAsync(IDialogContext context)
         {
+            
             var message = context.MakeMessage();
             var actions = new List<CardAction>();
 

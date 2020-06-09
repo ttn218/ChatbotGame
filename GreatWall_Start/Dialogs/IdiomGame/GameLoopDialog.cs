@@ -22,7 +22,7 @@ namespace LionKing.Dialogs.IdiomGame
         bool Answerflag = false;
         static int Time = 30;
         string strMessage;
-        
+        List<Quiz> quizzes;
         public async Task StartAsync(IDialogContext context)
         {
             score = 0;
@@ -31,9 +31,10 @@ namespace LionKing.Dialogs.IdiomGame
             timer.Interval = 1000;
             timer.Elapsed += (sender, e) => { OnTimedEventAsync(context, timer); };
             timer.Start();
-            
 
-            Quiz quiz = Quiz.Quizzes.ElementAt(index - 1);
+            quizzes = Quiz.Quizzes.OrderBy(g => Guid.NewGuid()).ToList<Quiz>();
+
+            Quiz quiz = quizzes.ElementAt(index - 1);
             await Quizset(context, quiz);
             
         }
