@@ -19,8 +19,7 @@ namespace LionKing
         
         public async Task StartAsync(IDialogContext context)
         {
-            Idiom.Loadidiom();
-            Quiz.CreateQuiz(Idiom.Idioms);
+            
             await context.PostAsync(strWelcomMMessage);
 
             context.Wait(MessageReceivedAsync);

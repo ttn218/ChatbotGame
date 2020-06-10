@@ -20,26 +20,29 @@ namespace LionKing.Dialogs.IdiomGame
         int index = 1;
         int score;
         bool Answerflag = false;
-        static int Time = 30;
+        int Time = 30;
         string strMessage;
-        List<Quiz> quizzes;
+        static Random random;
+        IQuiz quiz;
+
         public async Task StartAsync(IDialogContext context)
         {
             score = 0;
             Time = 30;
+            index = 1;
             Timer timer = new Timer();
             timer.Interval = 1000;
-            timer.Elapsed += (sender, e) => { OnTimedEventAsync(context, timer); };
+            timer.Elapsed += (sender, e) => { OnTimedEventAsync(context, timer, Time); };
             timer.Start();
-
-            quizzes = Quiz.Quizzes.OrderBy(g => Guid.NewGuid()).ToList<Quiz>();
-
-            Quiz quiz = quizzes.ElementAt(index - 1);
-            await Quizset(context, quiz);
             
         }
 
-        private async void OnTimedEventAsync(IDialogContext context, Timer timer)
+        public GameLoopDialog(IQuiz quiz)
+        {
+            this.quiz = quiz;
+        }
+
+        private async void OnTimedEventAsync(IDialogContext context, Timer timer, int Time)
         {
             Time = Time - 1;
             
@@ -59,61 +62,6 @@ namespace LionKing.Dialogs.IdiomGame
         public async Task GameLoop(IDialogContext context, IAwaitable<object> result)
         {
 
-            Quiz quiz = Quiz.Quizzes.ElementAt(index - 1);
-            if (!Answerflag)
-            {
-                await Quizset(context, quiz);
-            }
-            else
-            {
-                Activity activity = await result as Activity;
-                string strSelected = activity.Text.Trim();
-
-                if (strSelected == quiz.Answer)
-                {
-                    score++;
-                    index++;
-                    Answerflag = false;
-                    strMessage = "정답입니다.";
-                    await context.PostAsync(strMessage);
-
-                    await GameLoop(context, result);
-                }
-                else if(strSelected == "Exit")
-                {
-                    context.Done(score.ToString());
-                }
-                else
-                {
-                    index++;
-                    Answerflag = false;
-                    strMessage = "틀렸습니다.";
-                    await context.PostAsync(strMessage);
-                    await GameLoop(context, result);
-                }
-            }
-        }
-
-        public async Task Quizset(IDialogContext context, Quiz quiz)
-        {
-            var message = context.MakeMessage();
-            var actions = new List<CardAction>();
-            actions.Add(new CardAction() { Title = "1. " + quiz.Example[0], Value = quiz.Example[0], Type = ActionTypes.ImBack });
-            actions.Add(new CardAction() { Title = "2. " + quiz.Example[1], Value = quiz.Example[1], Type = ActionTypes.ImBack });
-            actions.Add(new CardAction() { Title = "3. " + quiz.Example[2], Value = quiz.Example[2], Type = ActionTypes.ImBack });
-
-            strMessage = "남은시간 : " + Time + "초 " + "점수 : " + score + System.Environment.NewLine + "\"" + quiz.Meaning + "\" 라는 뜻을 가진 사자성어는?";
-
-            await context.PostAsync(strMessage);
-
-            message.Attachments.Add(new HeroCard { Title = "다음 보기중 고르시오", Buttons = actions }.ToAttachment());
-
-            message.AttachmentLayout = "carousel";
-
-            await context.PostAsync(message);
-
-            Answerflag = true;
-            context.Wait(GameLoop);
         }
     }
 }

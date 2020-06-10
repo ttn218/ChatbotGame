@@ -18,7 +18,7 @@ namespace LionKing.Dialogs.IdiomGame
     {
         string strMessage;
         private string strWelcomMMessage = "게임을 시작할까요? (Yes or No)";
-
+        IQuiz quiz = new IdiomQuiz();
         public async Task StartAsync(IDialogContext context)
         {
             
@@ -43,7 +43,8 @@ namespace LionKing.Dialogs.IdiomGame
 
             if(strSelected == "Yes")
             {
-                context.Call(new GameLoopDialog(), GameOver);
+                quiz.CreateQuiz();
+                context.Call(new GameLoopDialog(quiz), GameOver);
             }
             else if(strSelected == "No")
             {

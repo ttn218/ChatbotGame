@@ -1,4 +1,5 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using LionKing.Model;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,10 @@ namespace LionKing.Dialogs.IdiomGame
 
         public async Task StartAsync(IDialogContext context)
         {
+            
+
+            
+
             var message = context.MakeMessage();
             var actions = new List<CardAction>();
 
