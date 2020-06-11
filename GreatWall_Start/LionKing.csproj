@@ -181,7 +181,6 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Dialogs\FAQDialog.cs" />
     <Compile Include="Dialogs\IdiomGame\GameLoopDialog.cs" />
     <Compile Include="Dialogs\IdiomGame\GameStartDialog.cs" />
     <Compile Include="Dialogs\IdiomGame\IdiomGameDialog.cs" />
@@ -190,7 +189,6 @@
     <Compile Include="Model\IdiomQuiz.cs" />
     <Compile Include="Model\IdiomQuizValue.cs" />
     <Compile Include="Model\IQuiz.cs" />
-    <Compile Include="Dialogs\OrderDialog.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -198,12 +196,10 @@
     <Compile Include="Helpers\CardHelper.cs" />
     <Compile Include="Helpers\SQLHelper.cs" />
     <Compile Include="Model\Level.cs" />
-    <Compile Include="Model\OrderItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Properties\PublishProfiles\201544001bot - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -214,6 +210,7 @@
   <ItemGroup>
     <Folder Include="Dialogs\initialGame\" />
     <Folder Include="Dialogs\neoGame\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

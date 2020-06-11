@@ -18,7 +18,6 @@ namespace LionKing.Dialogs.IdiomGame
     {
         string strMessage;
         private string strWelcomMMessage = "게임난이도를 정해주세요. (Easy, Nomal, Hard)";
-        IQuiz quiz;
         public async Task StartAsync(IDialogContext context)
         {
             
