@@ -7,23 +7,15 @@ using System.Linq;
 using System.Web;
 
 namespace LionKing.Model
-{ 
+{
     [Serializable]
     public class Idiom
     {
-        private static List<Idiom> idioms = new List<Idiom>();
+        static List<Idiom> words = new List<Idiom>();
+
         private string word;
         private string meaning;
 
-        private static string strSQL = "SELECT * FROM Idioms";
-
-        public static List<Idiom> Idioms
-        {
-            get
-            {
-                return idioms;
-            }
-        }
         public string Word
         {
             get
@@ -44,17 +36,30 @@ namespace LionKing.Model
         {
             this.word = word;
             this.meaning = meaning;
-
-            
         }
 
-        public static void Loadidiom()
+        public static List<Idiom> Words
+        {
+            get
+            {
+                return words;
+            }
+            set
+            {
+                words = value;
+            }
+        }
+
+        private static string strSQL = "SELECT * FROM Idioms";
+
+        public static void Loadwords()
         {
             DataSet DB_DS = SQLHelper.RunSQL(strSQL);
             foreach(DataRow row in DB_DS.Tables[0].Rows)
             {
-                idioms.Add(new Idiom(row["Word"].ToString(), row["meaning"].ToString()));
+                words.Add(new Idiom(row["Word"].ToString(), row["meaning"].ToString()));
             }
+            
         }
 
     }
