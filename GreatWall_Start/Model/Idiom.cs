@@ -7,7 +7,7 @@ using System.Linq;
 using System.Web;
 
 namespace LionKing.Model
-{ 
+{
     [Serializable]
     public class Idiom
     {
@@ -38,7 +38,17 @@ namespace LionKing.Model
             this.meaning = meaning;
         }
 
-        public static List<Idiom> Words { get => words; set => words = value; }
+        public static List<Idiom> Words
+        {
+            get
+            {
+                return words;
+            }
+            set
+            {
+                words = value;
+            }
+        }
 
         private static string strSQL = "SELECT * FROM Idioms";
 
@@ -49,6 +59,7 @@ namespace LionKing.Model
             {
                 words.Add(new Idiom(row["Word"].ToString(), row["meaning"].ToString()));
             }
+            
         }
 
     }

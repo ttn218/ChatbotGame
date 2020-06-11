@@ -17,20 +17,19 @@ namespace LionKing.Dialogs.IdiomGame
     public class GameStartDialog : IDialog<string>
     {
         string strMessage;
-        private string strWelcomMMessage = "게임을 시작할까요? (Yes or No)";
-        IQuiz quiz = new IdiomQuiz();
+        private string strWelcomMMessage = "게임난이도를 정해주세요. (Easy, Nomal, Hard)";
+        IQuiz quiz;
         public async Task StartAsync(IDialogContext context)
         {
             
             var message = context.MakeMessage();
             var actions = new List<CardAction>();
 
-            actions.Add(new CardAction() { Title = "1. Yes", Value = "Yes", Type = ActionTypes.ImBack });
-            actions.Add(new CardAction() { Title = "2. No", Value = "No", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() { Title = "1. Easy", Value = "Easy", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() { Title = "2. Nomal", Value = "Nomal", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() { Title = "3. Hard", Value = "Hard", Type = ActionTypes.ImBack });
 
-            message.Attachments.Add(new HeroCard { Title = strWelcomMMessage, Buttons = actions }.ToAttachment());
-
-            message.AttachmentLayout = "carousel";
+            message.Attachments.Add(new HeroCard { Title = strWelcomMMessage, Buttons = actions}.ToAttachment());
 
             await context.PostAsync(message);
             context.Wait(MessageReceivedAsync);
@@ -41,22 +40,26 @@ namespace LionKing.Dialogs.IdiomGame
             Activity activity = await result as Activity;
             string strSelected = activity.Text.Trim();
 
-            if(strSelected == "Yes")
+            if(strSelected == "Easy")
             {
-                quiz.CreateQuiz();
-                context.Call(new GameLoopDialog(quiz), GameOver);
+                context.Call(new GameLoopDialog(Level.EASY), GameOver);
             }
-            else if(strSelected == "No")
+            else if(strSelected == "Nomal")
             {
-                context.Done("Exit Game");
+                context.Call(new GameLoopDialog(Level.NOMAL), GameOver);
+            }
+            else if(strSelected == "Hard")
+            {
+                context.Call(new GameLoopDialog(Level.HARD), GameOver);
             }
             else
             {
                 strMessage = "Yes or No 중에 골라주세요";
                 await context.PostAsync(strMessage);
                 context.Wait(MessageReceivedAsync);
-                
+                return;
             }
+            
         }
 
         public async Task GameOver(IDialogContext context, IAwaitable<string> result)

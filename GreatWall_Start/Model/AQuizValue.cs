@@ -1,8 +1,11 @@
-﻿namespace LionKing.Model
+﻿using System;
+
+namespace LionKing.Model
 {
+    [Serializable]
     public class AQuizValue
     {
-        protected string meaning;
-        protected string[] answers;
+        public string meaning; // 설명
+        public string[] answers; // 정답들
     }
 }

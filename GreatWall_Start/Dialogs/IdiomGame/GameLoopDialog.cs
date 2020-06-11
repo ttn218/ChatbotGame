@@ -19,30 +19,37 @@ namespace LionKing.Dialogs.IdiomGame
     {
         int index = 1;
         int score;
-        bool Answerflag = false;
-        int Time = 30;
+        static int Time = 300;
         string strMessage;
-        static Random random;
-        IQuiz quiz;
-
+        static IQuiz quiz;
+        bool nomalCheck = false;
+        static bool exitcheck = false;
         public async Task StartAsync(IDialogContext context)
         {
+            
+            quiz.CreateQuiz();
             score = 0;
-            Time = 30;
+            Time = 300;
             index = 1;
+            nomalCheck = false;
+            exitcheck = false;
+
             Timer timer = new Timer();
             timer.Interval = 1000;
-            timer.Elapsed += (sender, e) => { OnTimedEventAsync(context, timer, Time); };
+            timer.Elapsed += (sender, e) => { OnTimedEventAsync(context, timer); };
             timer.Start();
-            
+
+            await showMessage(context);
+
+            context.Wait(GameLoop);
         }
 
-        public GameLoopDialog(IQuiz quiz)
+        public GameLoopDialog(Level level)
         {
-            this.quiz = quiz;
+            quiz = new IdiomQuiz(level);
         }
 
-        private async void OnTimedEventAsync(IDialogContext context, Timer timer, int Time)
+        private async void OnTimedEventAsync(IDialogContext context, Timer timer)
         {
             Time = Time - 1;
             
@@ -52,16 +59,64 @@ namespace LionKing.Dialogs.IdiomGame
                 var actions = new List<CardAction>();
                 actions.Add(new CardAction() { Title = "1. 나가기", Value = "Exit", Type = ActionTypes.PostBack });
                 message.Attachments.Add(new HeroCard { Title = "TimeOver", Buttons = actions }.ToAttachment());
+                exitcheck = true;
                 await context.PostAsync(message);
-                timer.Stop();
-                
+                timer.Stop();  
             }
 
         }
 
         public async Task GameLoop(IDialogContext context, IAwaitable<object> result)
         {
+            Activity activity = await result as Activity;
+            string strSelected = activity.Text.Trim();
 
+            if(exitcheck)
+            {
+                context.Done(score.ToString());
+                return;
+            }
+
+            if(!quiz.QuizAnswer(strSelected, index -1, out strMessage))
+            {
+                index++;
+                nomalCheck = false;
+                await context.PostAsync(strMessage);
+                await showMessage(context);
+                context.Wait(GameLoop);
+                return;
+            }
+
+            if(quiz.LEVEL == Level.NOMAL)
+            {
+                if(strSelected.Length < 2)
+                {
+                    if(!nomalCheck)
+                    {
+                        await context.PostAsync(strMessage);
+                        await showMessage(context);
+                        context.Wait(GameLoop);
+                        nomalCheck = true;
+                        return;
+                    }
+                }
+            }
+            nomalCheck = false;
+            index++;
+            score++;
+
+            await context.PostAsync(strMessage);
+            await showMessage(context);
+            context.Wait(GameLoop);
+        }
+        public async Task showMessage(IDialogContext context)
+        {
+            var message = quiz.QuizMessage(context, index - 1, out strMessage);
+
+            strMessage = "남은시간 : " + Time + "초" + "\t" + "Score : " + score + Environment.NewLine + strMessage;
+
+            await context.PostAsync(strMessage);
+            await context.PostAsync(message);
         }
     }
 }

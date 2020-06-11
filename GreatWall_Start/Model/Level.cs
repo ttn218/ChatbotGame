@@ -1,5 +1,8 @@
-﻿namespace LionKing.Model
+﻿using System;
+
+namespace LionKing.Model
 {
+    [Serializable]
     public enum Level
     {
         EASY,
