@@ -7,6 +7,8 @@ using System.Net.Http;
 using LionKing.Dialogs.IdiomGame;
 using System.Collections.Generic;
 using LionKing.Model;
+using LionKing.Dialogs.neoGame;
+using LionKing.Dialogs.initialGame;
 
 namespace LionKing
 {
@@ -20,6 +22,8 @@ namespace LionKing
         public async Task StartAsync(IDialogContext context)
         {
             Idiom.Loadwords();
+            Neo.Loadwords();
+            Initial.Loadwords();
             await context.PostAsync(strWelcomMMessage);
 
             context.Wait(MessageReceivedAsync);
@@ -31,7 +35,8 @@ namespace LionKing
             var actions = new List<CardAction>();
 
             actions.Add(new CardAction() { Title = "1. 사자성어 게임", Value = "사자성어게임", Type = ActionTypes.ImBack });
-
+            actions.Add(new CardAction() { Title = "2. 신조어 게임", Value = "신조어게임", Type = ActionTypes.ImBack });
+            actions.Add(new CardAction() { Title = "3. 초성퀴즈", Value = "초성퀴즈", Type = ActionTypes.ImBack });
             message.Attachments.Add(new HeroCard { Title = "어떤 게임을 하실껀가요?", Buttons = actions }.ToAttachment());
 
             await context.PostAsync(message);
@@ -50,6 +55,20 @@ namespace LionKing
                 await context.PostAsync(strMessage);
 
                 context.Call(new IdiomGameDialog(), DialogResumeAfter);
+            }
+            else if(strSelected == "신조어게임")
+            {
+                strMessage = "신조어 게임 연결합니다.";
+                await context.PostAsync(strMessage);
+
+                context.Call(new NeoGameDialog(), DialogResumeAfter);
+            }
+            else if(strSelected == "초성퀴즈")
+            {
+                strMessage = "초성퀴즈 연결합니다.";
+                await context.PostAsync(strMessage);
+
+                context.Call(new initialGameDialog(), DialogResumeAfter);
             }
             else
             {

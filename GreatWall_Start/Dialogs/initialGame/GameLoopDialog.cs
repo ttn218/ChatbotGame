@@ -1,37 +1,34 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using LionKing.Model;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
-
 using System.Timers;
 
-using LionKing.Model;
-using Microsoft.Bot.Connector;
-using System.Threading;
-using Timer = System.Timers.Timer;
-
-namespace LionKing.Dialogs.IdiomGame
+namespace LionKing.Dialogs.initialGame
 {
     [Serializable]
-    public class GameLoopDialog : IDialog<string>
+    public class GameLoopDialog : IDialog<object>
     {
+        
         int index = 1;
         int score;
-        static int Time = 300;
+        static int Time = 20;
         string strMessage;
         static IQuiz quiz;
-        bool nomalCheck = false;
         static bool exitcheck = false;
+        public GameLoopDialog(string topic)
+        {
+            quiz = new InitialQuiz(topic);
+        }
+
         public async Task StartAsync(IDialogContext context)
         {
-            
             quiz.CreateQuiz();
             score = 0;
-            Time = 300;
+            Time = 20;
             index = 1;
-            nomalCheck = false;
             exitcheck = false;
 
             Timer timer = new Timer();
@@ -43,17 +40,11 @@ namespace LionKing.Dialogs.IdiomGame
 
             context.Wait(GameLoop);
         }
-
-        public GameLoopDialog(Level level)
-        {
-            quiz = new IdiomQuiz(level);
-        }
-
         private async void OnTimedEventAsync(IDialogContext context, Timer timer)
         {
             Time = Time - 1;
-            
-            if(Time <= 0)
+
+            if (Time <= 0)
             {
                 var message = context.MakeMessage();
                 var actions = new List<CardAction>();
@@ -61,46 +52,28 @@ namespace LionKing.Dialogs.IdiomGame
                 message.Attachments.Add(new HeroCard { Title = "TimeOver", Buttons = actions }.ToAttachment());
                 exitcheck = true;
                 await context.PostAsync(message);
-                timer.Stop();  
+                timer.Stop();
             }
         }
-
         public async Task GameLoop(IDialogContext context, IAwaitable<object> result)
         {
             Activity activity = await result as Activity;
             string strSelected = activity.Text.Trim();
 
-            if(exitcheck)
+            if (exitcheck)
             {
                 context.Done(score.ToString());
                 return;
             }
 
-            if(!quiz.QuizAnswer(strSelected, index -1, out strMessage))
+            if (!quiz.QuizAnswer(strSelected, index - 1, out strMessage))
             {
                 index++;
-                nomalCheck = false;
                 await context.PostAsync(strMessage);
                 await showMessage(context);
                 context.Wait(GameLoop);
                 return;
             }
-
-            if(quiz.LEVEL == Level.NOMAL)
-            {
-                if(strSelected.Length < 2)
-                {
-                    if(!nomalCheck)
-                    {
-                        await context.PostAsync(strMessage);
-                        await showMessage(context);
-                        context.Wait(GameLoop);
-                        nomalCheck = true;
-                        return;
-                    }
-                }
-            }
-            nomalCheck = false;
             index++;
             score++;
 

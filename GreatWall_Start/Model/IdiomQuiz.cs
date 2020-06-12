@@ -77,9 +77,9 @@ namespace LionKing.Model
                     example.Add(answers[0]);
                 }
 
-                Quizzes.Add(new IdiomQuizValue(answers, idiom.Meaning,example, index));
+                quizzes.Add(new IdiomQuizValue(answers, idiom.Meaning,example, index));
             }
-            
+            quizzes = quizzes.Distinct().ToList();
         }
 
         public bool QuizAnswer(string Answer, int index, out string message)
