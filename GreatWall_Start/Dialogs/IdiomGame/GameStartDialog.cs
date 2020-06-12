@@ -53,7 +53,7 @@ namespace LionKing.Dialogs.IdiomGame
             }
             else
             {
-                strMessage = "Yes or No 중에 골라주세요";
+                strMessage = "목록중에 골라 주세요";
                 await context.PostAsync(strMessage);
                 context.Wait(MessageReceivedAsync);
                 return;

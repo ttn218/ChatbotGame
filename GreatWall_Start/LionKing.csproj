@@ -184,10 +184,19 @@
     <Compile Include="Dialogs\IdiomGame\GameLoopDialog.cs" />
     <Compile Include="Dialogs\IdiomGame\GameStartDialog.cs" />
     <Compile Include="Dialogs\IdiomGame\IdiomGameDialog.cs" />
+    <Compile Include="Dialogs\initialGame\GameLoopDialog.cs" />
+    <Compile Include="Dialogs\initialGame\GameStartDialog.cs" />
+    <Compile Include="Dialogs\initialGame\initialGameDialog.cs" />
+    <Compile Include="Dialogs\neoGame\GameLoopDialog.cs" />
+    <Compile Include="Dialogs\neoGame\GameStartDialog.cs" />
+    <Compile Include="Dialogs\neoGame\NeoGameDialog.cs" />
     <Compile Include="Model\AQuizValue.cs" />
     <Compile Include="Model\Idiom.cs" />
     <Compile Include="Model\IdiomQuiz.cs" />
     <Compile Include="Model\IdiomQuizValue.cs" />
+    <Compile Include="Model\Initial.cs" />
+    <Compile Include="Model\InitialQuiz.cs" />
+    <Compile Include="Model\InitialQuizValue.cs" />
     <Compile Include="Model\IQuiz.cs" />
     <Compile Include="Dialogs\RootDialog.cs" />
     <Compile Include="Global.asax.cs">
@@ -196,6 +205,9 @@
     <Compile Include="Helpers\CardHelper.cs" />
     <Compile Include="Helpers\SQLHelper.cs" />
     <Compile Include="Model\Level.cs" />
+    <Compile Include="Model\Neo.cs" />
+    <Compile Include="Model\NeoQuiz.cs" />
+    <Compile Include="Model\NeoQuizValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -208,8 +220,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Dialogs\initialGame\" />
-    <Folder Include="Dialogs\neoGame\" />
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <PropertyGroup>
