@@ -29,7 +29,7 @@ namespace LionKing.Dialogs.IdiomGame
             
             quiz.CreateQuiz();
             score = 0;
-            Time = 300;
+            Time = 15;
             index = 1;
             nomalCheck = false;
             exitcheck = false;

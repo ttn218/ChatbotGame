@@ -181,6 +181,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\RankingDialog.cs" />
     <Compile Include="Dialogs\IdiomGame\GameLoopDialog.cs" />
     <Compile Include="Dialogs\IdiomGame\GameStartDialog.cs" />
     <Compile Include="Dialogs\IdiomGame\IdiomGameDialog.cs" />

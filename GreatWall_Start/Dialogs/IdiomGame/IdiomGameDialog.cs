@@ -6,6 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using LionKing.Dialogs;
+using LionKing.Helpers;
+using LionKing.Model;
 
 namespace LionKing.Dialogs.IdiomGame
 {
