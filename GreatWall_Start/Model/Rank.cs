@@ -81,5 +81,43 @@ namespace LionKing.Model
             }
         }
         
+        public static string makeRanking(List<Model.Rank> easy, List<Model.Rank> nomal, List<Model.Rank> hard)
+        {
+            string strdata = "\t\tEasy\t\t\t\t\tNomal\t\t\t\t\tHard" + Environment.NewLine
+                            + "순위\t닉네임\t\t스코어\t\t닉네임\t\t스코어\t\t닉네임\t\t스코어\t\t" + Environment.NewLine;
+            string strlist = null;
+            for(int i=0; i < 10; i++)
+            {
+                strlist = + (i+1) + "\t" + easy[i].User + "\t\t" + easy[i].Score + "\t\t" + nomal[i].User + "\t\t" + nomal[i].Score + "\t\t" + hard[i].User + "\t\t" + hard[i].Score + Environment.NewLine;
+            }
+
+            return strdata + strlist;
+        }
+
+        public static string makeRanking(List<Model.Rank> nomal, List<Model.Rank> hard)
+        {
+            string strdata = "\t\tNomal\t\t\t\t\tHard" + Environment.NewLine
+                           + "순위\t닉네임\t\t스코어\t\t닉네임\t\t스코어" + Environment.NewLine;
+            string strlist = null;
+            for (int i = 0; i < 10; i++)
+            {
+                strlist = +(i + 1) + "\t" + nomal[i].User + "\t\t" + nomal[i].Score + "\t\t" + hard[i].User + "\t\t" + hard[i].Score + Environment.NewLine;
+            }
+
+            return strdata + strlist;
+        }
+
+        public static string makeRanking(List<Model.Rank> topic)
+        {
+            string strdata = "\t\tEasy\t\t\t\t\tNomal\t\t\t\t\tHard" + Environment.NewLine
+                           + "순위\t닉네임\t\t스코어\t\t닉네임\t\t스코어\t\t닉네임\t\t스코어\t\t" + Environment.NewLine;
+            string strlist = null;
+            for (int i = 0; i < 10; i++)
+            {
+                strlist = +(i + 1) + "\t" + topic[i].User + "\t\t" + topic[i].Score + Environment.NewLine;
+            }
+
+            return strdata + strlist;
+        }
     }
 }

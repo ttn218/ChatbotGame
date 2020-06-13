@@ -31,23 +31,23 @@ namespace LionKing.Dialogs.Rank
                 var result2 = Model.Rank.Ranks.Where(n => n.Gtype == gtype && n.Glevel == "N").OrderByDescending(n => n.Score).ToList();
                 var result3 = Model.Rank.Ranks.Where(n => n.Gtype == gtype && n.Glevel == "H").OrderByDescending(n => n.Score).ToList();
 
-                await context.PostAsync(result1.ToString());
-                await context.PostAsync(result2.ToString());
-                await context.PostAsync(result3.ToString());
+                await context.PostAsync("사자왕 순위");
+                await context.PostAsync(Model.Rank.makeRanking(result1, result2, result3));
             }
             else if(gtype == "neo")
             {
                 var result1 = Model.Rank.Ranks.Where(n => n.Gtype == gtype && n.Glevel == "N").OrderByDescending(n => n.Score).ToList();
                 var result2 = Model.Rank.Ranks.Where(n => n.Gtype == gtype && n.Glevel == "H").OrderByDescending(n => n.Score).ToList();
 
-                await context.PostAsync(result1.ToString());
-                await context.PostAsync(result2.ToString());
+                await context.PostAsync("아재왕 순위");
+                await context.PostAsync(Model.Rank.makeRanking(result1, result2));
             }
             else if(gtype == "initial")
             {
                 var result1 = Model.Rank.Ranks.Where(n => n.Gtype == gtype && n.Glevel == "S").OrderByDescending(n => n.Score).ToList();
 
-                await context.PostAsync(result1.ToString());
+                await context.PostAsync("초성왕 순위");
+                await context.PostAsync(Model.Rank.makeRanking(result1));
             }
 
             context.Wait(MessageReceivedAsync);
