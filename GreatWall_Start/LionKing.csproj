@@ -190,7 +190,10 @@
     <Compile Include="Dialogs\neoGame\GameLoopDialog.cs" />
     <Compile Include="Dialogs\neoGame\GameStartDialog.cs" />
     <Compile Include="Dialogs\neoGame\NeoGameDialog.cs" />
+    <Compile Include="Dialogs\Rank\insertRankDialog.cs" />
+    <Compile Include="Dialogs\Rank\RankDialog.cs" />
     <Compile Include="Model\AQuizValue.cs" />
+    <Compile Include="Model\ARankValue.cs" />
     <Compile Include="Model\Idiom.cs" />
     <Compile Include="Model\IdiomQuiz.cs" />
     <Compile Include="Model\IdiomQuizValue.cs" />
@@ -208,6 +211,8 @@
     <Compile Include="Model\Neo.cs" />
     <Compile Include="Model\NeoQuiz.cs" />
     <Compile Include="Model\NeoQuizValue.cs" />
+    <Compile Include="Model\Rank.cs" />
+    <Compile Include="Model\RankValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

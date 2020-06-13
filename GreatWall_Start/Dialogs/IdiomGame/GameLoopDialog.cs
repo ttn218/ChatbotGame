@@ -19,7 +19,7 @@ namespace LionKing.Dialogs.IdiomGame
     {
         int index = 1;
         int score;
-        static int Time = 300;
+        static int Time = 30;
         string strMessage;
         static IQuiz quiz;
         bool nomalCheck = false;
@@ -29,7 +29,7 @@ namespace LionKing.Dialogs.IdiomGame
             
             quiz.CreateQuiz();
             score = 0;
-            Time = 300;
+            Time = 30;
             index = 1;
             nomalCheck = false;
             exitcheck = false;
