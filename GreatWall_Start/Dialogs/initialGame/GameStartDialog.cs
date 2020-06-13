@@ -55,7 +55,7 @@ namespace LionKing.Dialogs.initialGame
             context.Call(new insertRankDialog(type, level, score), GameOver);
         }
 
-        private async Task GameOver(IDialogContext context, IAwaitable<object> result)
+        private async Task GameOver(IDialogContext context, IAwaitable<string> result)
         {
             try
             {

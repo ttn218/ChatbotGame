@@ -43,6 +43,7 @@ namespace LionKing.Model
             foreach (Idiom idiom in randidioms)
             {
                 List<string> example;
+                
                 //사자성어 4글자중 랜덤한 위치 빈칸 -> 나오는 보기들은 한글자 5개 -> 보기에서 고르거나, 직접 사자성어 전체를 써서 맞추거나.
                 if (LEVEL == Level.EASY)
                 {

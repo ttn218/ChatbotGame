@@ -9,7 +9,7 @@ using Microsoft.Bot.Connector;
 namespace LionKing.Dialogs.neoGame
 {
     [Serializable]
-    public class GameStartDialog : IDialog<object>
+    public class GameStartDialog : IDialog<string>
     {
         // 랭킹 인스턴스
         public string level;
@@ -60,22 +60,6 @@ namespace LionKing.Dialogs.neoGame
         {
             string score = await result;
             context.Call(new insertRankDialog(type, level, score), GameOver);
-        }
-
-        private async Task GameOver(IDialogContext context, IAwaitable<object> result)
-        {
-            try
-            {
-                strMessage = "Your Score : " + await result;
-
-                await context.PostAsync(strMessage);
-
-                context.Done("Game Over");
-            }
-            catch (TooManyAttemptsException)
-            {
-                await context.PostAsync("Error occurred...");
-            }
         }
     }
 }
