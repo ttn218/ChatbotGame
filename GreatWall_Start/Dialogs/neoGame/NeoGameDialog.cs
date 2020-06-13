@@ -1,4 +1,5 @@
-﻿using Microsoft.Bot.Builder.Dialogs;
+﻿using LionKing.Dialogs.Rank;
+using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,8 @@ namespace LionKing.Dialogs.neoGame
     [Serializable]
     public class NeoGameDialog : IDialog<string>
     {
+        string type = "neo";
+
         public async Task StartAsync(IDialogContext context)
         {
             var message = context.MakeMessage();
@@ -36,6 +39,10 @@ namespace LionKing.Dialogs.neoGame
             if (strSelected == "게임시작")
             {
                 context.Call(new GameStartDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "랭킹")
+            {
+                context.Call(new RankDialog(type), DialogResumeAfter);
             }
             else if (strSelected == "나가기")
             {

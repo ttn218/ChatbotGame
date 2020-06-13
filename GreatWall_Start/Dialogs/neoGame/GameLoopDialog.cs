@@ -14,7 +14,7 @@ namespace LionKing.Dialogs.neoGame
         
         int index = 1;
         int score;
-        static int Time = 300;
+        static int Time = 30;
         string strMessage;
         static IQuiz quiz;
         static bool exitcheck = false;
@@ -27,7 +27,7 @@ namespace LionKing.Dialogs.neoGame
         {
             quiz.CreateQuiz();
             score = 0;
-            Time = 300;
+            Time = 30;
             index = 1;
             exitcheck = false;
 

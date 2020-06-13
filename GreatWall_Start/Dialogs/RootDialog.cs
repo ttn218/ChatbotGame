@@ -24,6 +24,7 @@ namespace LionKing
             Idiom.Loadwords();
             Neo.Loadwords();
             Initial.Loadwords();
+
             await context.PostAsync(strWelcomMMessage);
 
             context.Wait(MessageReceivedAsync);

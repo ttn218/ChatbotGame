@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LionKing.Dialogs.Rank;
 using LionKing.Model;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
@@ -10,6 +11,11 @@ namespace LionKing.Dialogs.initialGame
     [Serializable]
     public class GameStartDialog : IDialog<object>
     {
+        // 랭킹 인스턴스
+        public string level;
+        public string type = "initial";
+        // 요기까지
+
         string strMessage;
         private string strWelcomMMessage = "주제를 정해주세요.";
         
@@ -39,7 +45,14 @@ namespace LionKing.Dialogs.initialGame
                 context.Wait(MessageReceivedAsync);
                 return;
             }
-            context.Call(new GameLoopDialog(strSelected), GameOver);
+            level = strSelected;
+            context.Call(new GameLoopDialog(strSelected), Rank);
+        }
+
+        public async Task Rank(IDialogContext context, IAwaitable<string> result)
+        {
+            string score = await result;
+            context.Call(new insertRankDialog(type, level, score), GameOver);
         }
 
         private async Task GameOver(IDialogContext context, IAwaitable<string> result)

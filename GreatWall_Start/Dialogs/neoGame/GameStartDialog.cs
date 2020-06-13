@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LionKing.Dialogs.Rank;
 using LionKing.Model;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
@@ -10,6 +11,11 @@ namespace LionKing.Dialogs.neoGame
     [Serializable]
     public class GameStartDialog : IDialog<string>
     {
+        // 랭킹 인스턴스
+        public string level;
+        public string type = "neo";
+        // 요기까지
+
         string strMessage;
         private string strWelcomMMessage = "게임난이도를 정해주세요. (Nomal, Hard)";
         public async Task StartAsync(IDialogContext context)
@@ -33,11 +39,13 @@ namespace LionKing.Dialogs.neoGame
 
             if (strSelected == "Nomal")
             {
-                context.Call(new GameLoopDialog(Level.NOMAL), GameOver);
+                level = "N";
+                context.Call(new GameLoopDialog(Level.NOMAL), Rank);
             }
             else if (strSelected == "Hard")
             {
-                context.Call(new GameLoopDialog(Level.HARD), GameOver);
+                level = "H";
+                context.Call(new GameLoopDialog(Level.HARD), Rank);
             }
             else
             {
@@ -48,20 +56,10 @@ namespace LionKing.Dialogs.neoGame
             }
         }
 
-        private async Task GameOver(IDialogContext context, IAwaitable<string> result)
+        public async Task Rank(IDialogContext context, IAwaitable<string> result)
         {
-            try
-            {
-                strMessage = "Your Score : " + await result;
-
-                await context.PostAsync(strMessage);
-
-                context.Done("Game Over");
-            }
-            catch (TooManyAttemptsException)
-            {
-                await context.PostAsync("Error occurred...");
-            }
+            string score = await result;
+            context.Call(new insertRankDialog(type, level, score), GameOver);
         }
     }
 }
