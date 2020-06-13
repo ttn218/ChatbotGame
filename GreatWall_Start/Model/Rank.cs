@@ -72,7 +72,7 @@ namespace LionKing.Model
         
         public static string selectSql = "select g_user, g_type, g_level, score from ranking";
         
-        public static void loadRank()
+        public static void LoadRank()
         {
             DataSet DB_DS = SQLHelper.RunSQL(selectSql);
             foreach (DataRow row in DB_DS.Tables[0].Rows)

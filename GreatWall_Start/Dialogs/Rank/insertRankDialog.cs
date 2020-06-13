@@ -29,6 +29,14 @@ namespace LionKing.Dialogs.Rank
 
         public async Task StartAsync(IDialogContext context)
         {
+            if( this.type == "initial")
+            {
+                if(this.level == "수도")
+                {
+                    this.level = "S";
+                }
+            }
+
             await context.PostAsync(strdata);
 
             context.Wait(MessageReceivedAsync);
