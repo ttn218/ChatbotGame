@@ -1,10 +1,12 @@
 ﻿using LionKing.Helpers;
+using Microsoft.Bot.Builder.Dialogs;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Web;
+using System.Web.Services.Description;
 
 namespace LionKing.Model
 {
@@ -69,9 +71,9 @@ namespace LionKing.Model
             this.score = s;
             this.glevel = l;
         }
-        
+
         public static string selectSql = "select g_user, g_type, g_level, score from ranking";
-        
+
         public static void LoadRank()
         {
             DataSet DB_DS = SQLHelper.RunSQL(selectSql);
@@ -80,6 +82,9 @@ namespace LionKing.Model
                 ranks.Add(new Rank(row["g_user"].ToString(), row["g_type"].ToString(), Int32.Parse(row["score"].ToString()), row["g_level"].ToString()));
             }
         }
-        
+        public void MakeRank(IDialogContext context)
+        {
+            
+        }
     }
 }

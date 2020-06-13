@@ -13,7 +13,7 @@ namespace LionKing.Dialogs.IdiomGame
     [Serializable]
     public class IdiomGameDialog : IDialog<string>
     {
-        string type = "idom";
+        string type = "idome";
 
         public async Task StartAsync(IDialogContext context)
         {
