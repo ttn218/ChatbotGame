@@ -9,7 +9,7 @@ using System.Timers;
 namespace LionKing.Dialogs.neoGame
 {
     [Serializable]
-    public class GameLoopDialog : IDialog<object>
+    public class GameLoopDialog : IDialog<string>
     {
         
         int index = 1;

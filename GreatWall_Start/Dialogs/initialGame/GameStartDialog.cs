@@ -42,7 +42,7 @@ namespace LionKing.Dialogs.initialGame
             context.Call(new GameLoopDialog(strSelected), GameOver);
         }
 
-        private async Task GameOver(IDialogContext context, IAwaitable<object> result)
+        private async Task GameOver(IDialogContext context, IAwaitable<string> result)
         {
             try
             {

@@ -8,7 +8,7 @@ using Microsoft.Bot.Connector;
 namespace LionKing.Dialogs.neoGame
 {
     [Serializable]
-    public class GameStartDialog : IDialog<object>
+    public class GameStartDialog : IDialog<string>
     {
         string strMessage;
         private string strWelcomMMessage = "게임난이도를 정해주세요. (Nomal, Hard)";
@@ -48,7 +48,7 @@ namespace LionKing.Dialogs.neoGame
             }
         }
 
-        private async Task GameOver(IDialogContext context, IAwaitable<object> result)
+        private async Task GameOver(IDialogContext context, IAwaitable<string> result)
         {
             try
             {

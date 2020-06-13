@@ -37,7 +37,7 @@ namespace LionKing.Helpers
             SqlConnection DB_CON = new SqlConnection(strDBServer);
             SqlCommand DB_Query = new SqlCommand(strQuery, DB_CON);
             DataSet DB_DS = new DataSet();
-
+            
             DB_Query.Parameters.Clear();
 
             foreach(SqlParameter p in para)
