@@ -19,7 +19,7 @@ namespace LionKing.Dialogs.IdiomGame
     {
         // 랭킹 인스턴스
         public string level;
-        public int score;
+        public string type = "idome";
         // 요기까지
 
         string strMessage;
@@ -47,14 +47,17 @@ namespace LionKing.Dialogs.IdiomGame
 
             if(strSelected == "Easy")
             {
+                level = "E";
                 context.Call(new GameLoopDialog(Level.EASY), Rank);
             }
             else if(strSelected == "Nomal")
             {
+                level = "N";
                 context.Call(new GameLoopDialog(Level.NOMAL), Rank);
             }
             else if(strSelected == "Hard")
             {
+                level = "H";
                 context.Call(new GameLoopDialog(Level.HARD), Rank);
             }
             else
@@ -70,15 +73,14 @@ namespace LionKing.Dialogs.IdiomGame
         public async Task Rank(IDialogContext context, IAwaitable<string> result)
         {
             string score = await result;
-            context.Call(new insertRankDialog(score), GameOver);
+            context.Call(new insertRankDialog(type, level, score), GameOver);
         }
 
         public async Task GameOver(IDialogContext context, IAwaitable<string> result)
         {
             try
             {
-                //strMessage = "Your Score : " + await result;
-                bool chk = false;
+                strMessage = "Your Score : " + await result;
                 await context.PostAsync(strMessage);
                 var message = context.MakeMessage();
                 var actions = new List<CardAction>();

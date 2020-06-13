@@ -13,6 +13,13 @@ namespace LionKing.Dialogs.Rank
 {
     public class RankDialog : IDialog<string>
     {
+        string gtype;
+
+        public RankDialog(string type)
+        {
+            this.gtype = type;
+        }
+
         public async Task StartAsync(IDialogContext context)
         {
             

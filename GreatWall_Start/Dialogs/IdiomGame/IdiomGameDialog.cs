@@ -1,4 +1,5 @@
-﻿using LionKing.Model;
+﻿using LionKing.Dialogs.Rank;
+using LionKing.Model;
 using Microsoft.Bot.Builder.Dialogs;
 using Microsoft.Bot.Connector;
 using System;
@@ -12,6 +13,7 @@ namespace LionKing.Dialogs.IdiomGame
     [Serializable]
     public class IdiomGameDialog : IDialog<string>
     {
+        string type = "idom";
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -39,6 +41,10 @@ namespace LionKing.Dialogs.IdiomGame
             if(strSelected == "게임시작")
             {
                 context.Call(new GameStartDialog(), DialogResumeAfter);
+            }
+            if(strSelected == "랭킹")
+            {
+                context.Call(new RankDialog(type), DialogResumeAfter);
             }
             else if(strSelected == "나가기")
             {
