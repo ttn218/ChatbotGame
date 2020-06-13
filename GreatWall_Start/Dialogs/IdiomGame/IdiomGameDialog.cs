@@ -13,7 +13,7 @@ namespace LionKing.Dialogs.IdiomGame
     [Serializable]
     public class IdiomGameDialog : IDialog<string>
     {
-        string type = "idom";
+        string type = "idome";
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -42,7 +42,7 @@ namespace LionKing.Dialogs.IdiomGame
             {
                 context.Call(new GameStartDialog(), DialogResumeAfter);
             }
-            if(strSelected == "랭킹")
+            else if(strSelected == "랭킹")
             {
                 context.Call(new RankDialog(type), DialogResumeAfter);
             }

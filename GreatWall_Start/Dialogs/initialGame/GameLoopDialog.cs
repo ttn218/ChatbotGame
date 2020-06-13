@@ -14,7 +14,7 @@ namespace LionKing.Dialogs.initialGame
         
         int index = 1;
         int score;
-        static int Time = 20;
+        static int Time = 30;
         string strMessage;
         static IQuiz quiz;
         static bool exitcheck = false;

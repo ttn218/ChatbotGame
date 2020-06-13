@@ -1,4 +1,6 @@
 ﻿using LionKing.Helpers;
+using Microsoft.Bot.Builder.Dialogs;
+using Microsoft.Bot.Connector;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,6 +19,7 @@ namespace LionKing.Model
         private string gtype;
         private int score;
         private string glevel;
+        public static IMessageActivity Message { get; set; }
 
         public string User
         {
@@ -81,43 +84,76 @@ namespace LionKing.Model
             }
         }
         
-        public static string makeRanking(List<Model.Rank> easy, List<Model.Rank> nomal, List<Model.Rank> hard)
+        public static IMessageActivity makeRanking(List<Model.Rank> easy, List<Model.Rank> nomal, List<Model.Rank> hard, IDialogContext context)
         {
-            string strdata = "\t\tEasy\t\t\t\t\tNomal\t\t\t\t\tHard" + Environment.NewLine
-                            + "순위\t닉네임\t\t스코어\t\t닉네임\t\t스코어\t\t닉네임\t\t스코어\t\t" + Environment.NewLine;
-            string strlist = null;
-            for(int i=0; i < 10; i++)
-            {
-                strlist = + (i+1) + "\t" + easy[i].User + "\t\t" + easy[i].Score + "\t\t" + nomal[i].User + "\t\t" + nomal[i].Score + "\t\t" + hard[i].User + "\t\t" + hard[i].Score + Environment.NewLine;
-            }
+            Message = context.MakeMessage();
 
-            return strdata + strlist;
+            List<CardAction> actions1 = new List<CardAction>();
+            List<CardAction> actions2 = new List<CardAction>();
+            List<CardAction> actions3 = new List<CardAction>();
+
+            for(int i=0; i < easy.Count && i < 7; i++)
+            {
+                actions1.Add(new CardAction() { Title = (i+1)+"등 / 닉네임 : " + easy[i].User + " / 점수 : " + easy[i].score, Value = "", Type = ActionTypes.PostBack});
+            }
+            Message.Attachments.Add(new HeroCard { Title = "사자왕 Easy 순위", Buttons = actions1 }.ToAttachment());
+
+            for (int i = 0; i < nomal.Count && i < 7; i++)
+            {
+                actions2.Add(new CardAction() { Title = (i + 1) + "등 / 닉네임 : " + nomal[i].User + " / 점수 : " + nomal[i].score, Value = "", Type = ActionTypes.PostBack });
+            }
+            Message.Attachments.Add(new HeroCard { Title = "사자왕 Nomal 순위", Buttons = actions2 }.ToAttachment());
+
+            for (int i = 0; i < hard.Count && i < 7; i++)
+            {
+                actions3.Add(new CardAction() { Title = (i + 1) + "등 / 닉네임 : " + hard[i].User + " / 점수 : " + hard[i].score, Value = "", Type = ActionTypes.PostBack });
+            }
+            Message.Attachments.Add(new HeroCard { Title = "사자왕 Hard 순위", Buttons = actions3 }.ToAttachment());
+
+            Message.AttachmentLayout = "carousel";
+
+            return Message;
         }
 
-        public static string makeRanking(List<Model.Rank> nomal, List<Model.Rank> hard)
+        public static IMessageActivity makeRanking(List<Model.Rank> nomal, List<Model.Rank> hard, IDialogContext context)
         {
-            string strdata = "\t\tNomal\t\t\t\t\tHard" + Environment.NewLine
-                           + "순위\t닉네임\t\t스코어\t\t닉네임\t\t스코어" + Environment.NewLine;
-            string strlist = null;
-            for (int i = 0; i < 10; i++)
-            {
-                strlist = +(i + 1) + "\t" + nomal[i].User + "\t\t" + nomal[i].Score + "\t\t" + hard[i].User + "\t\t" + hard[i].Score + Environment.NewLine;
-            }
+            Message = context.MakeMessage();
 
-            return strdata + strlist;
+            List<CardAction> actions1 = new List<CardAction>();
+            List<CardAction> actions2 = new List<CardAction>();
+
+            for (int i = 0; i < nomal.Count && i < 7 ; i++)
+            {
+                actions1.Add(new CardAction() { Title = (i + 1) + "등 / 닉네임 : " + nomal[i].User + " / 점수 : " + nomal[i].score, Value = "", Type = ActionTypes.PostBack });
+            }
+            Message.Attachments.Add(new HeroCard { Title = "아재왕 Nomal 순위", Buttons = actions1 }.ToAttachment());
+
+            for (int i = 0; i < hard.Count && i < 7 ; i++)
+            {
+                actions2.Add(new CardAction() { Title = (i + 1) + "등 / 닉네임 : " + hard[i].User + " / 점수 : " + hard[i].score, Value = "", Type = ActionTypes.PostBack });
+            }
+            Message.Attachments.Add(new HeroCard { Title = "아재왕 Hard 순위", Buttons = actions2 }.ToAttachment());
+
+            Message.AttachmentLayout = "carousel";
+
+            return Message;
         }
 
-        public static string makeRanking(List<Model.Rank> topic)
+        public static IMessageActivity makeRanking(List<Model.Rank> topic, IDialogContext context)
         {
-            string strdata = "\t\tEasy\t\t\t\t\tNomal\t\t\t\t\tHard" + Environment.NewLine
-                           + "순위\t닉네임\t\t스코어\t\t닉네임\t\t스코어\t\t닉네임\t\t스코어\t\t" + Environment.NewLine;
-            string strlist = null;
-            for (int i = 0; i < 10; i++)
-            {
-                strlist = +(i + 1) + "\t" + topic[i].User + "\t\t" + topic[i].Score + Environment.NewLine;
-            }
+            Message = context.MakeMessage();
 
-            return strdata + strlist;
+            List<CardAction> actions1 = new List<CardAction>();
+
+            for (int i = 0; i < topic.Count && i < 7 ; i++)
+            {
+                actions1.Add(new CardAction() { Title = (i + 1) + "등 / 닉네임 : " + topic[i].User + " / 점수 : " + topic[i].score, Value = "", Type = ActionTypes.PostBack });
+            }
+            Message.Attachments.Add(new HeroCard { Title = "초성왕 수도 순위", Buttons = actions1 }.ToAttachment());
+
+            Message.AttachmentLayout = "carousel";
+
+            return Message;
         }
     }
 }

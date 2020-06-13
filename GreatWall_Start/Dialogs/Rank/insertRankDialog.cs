@@ -57,7 +57,7 @@ namespace LionKing.Dialogs.Rank
 
             SQLHelper.ExecuteNonQuery("INSERT INTO ranking(g_user, g_type, score, g_level) " +
                                                 "VALUES(@g_user, @g_type, @score, @g_level)", para);
-
+            
             context.Done(this.score);
         }
     }
