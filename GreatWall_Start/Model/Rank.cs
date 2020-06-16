@@ -144,12 +144,21 @@ namespace LionKing.Model
             Message = context.MakeMessage();
 
             List<CardAction> actions1 = new List<CardAction>();
+            
+            var result1 = Model.Rank.Ranks.Where(n => (n.Gtype.Trim() == "initial")).OrderByDescending(n => n.Score).ToList();
+            int Count = result1.Select(v => v.Glevel).Distinct().Count();
+            string[] strchar = result1.Select(v => v.Glevel).Distinct().ToArray();
 
-            for (int i = 0; i < topic.Count && i < 7 ; i++)
+
+            for (int i = 0; i<Count; i++)
             {
-                actions1.Add(new CardAction() { Title = (i + 1) + "등 / 닉네임 : " + topic[i].User + " / 점수 : " + topic[i].score, Value = "", Type = ActionTypes.PostBack });
+                topic = result1.Where(v => v.glevel == strchar[i]).OrderByDescending(n => n.Score).ToList();
+                for (int j = 0; j < topic.Count && i < 7; j++)
+                {
+                    actions1.Add(new CardAction() { Title = (i + 1) + "등 / 닉네임 : " + topic[i].User + " / 점수 : " + topic[i].score, Value = "", Type = ActionTypes.PostBack });
+                }
+                Message.Attachments.Add(new HeroCard { Title = "초성왕" + strchar[i] + "순위", Buttons = actions1 }.ToAttachment());
             }
-            Message.Attachments.Add(new HeroCard { Title = "초성왕 수도 순위", Buttons = actions1 }.ToAttachment());
 
             Message.AttachmentLayout = "carousel";
 

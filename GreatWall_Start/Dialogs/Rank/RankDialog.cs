@@ -44,10 +44,10 @@ namespace LionKing.Dialogs.Rank
             }
             else if(gtype == "initial")
             {
-                var result1 = Model.Rank.Ranks.Where(n => (n.Gtype == gtype) && (n.Glevel.Trim() == "S")).OrderByDescending(n => n.Score).ToList();
+                
 
                 await context.PostAsync("초성왕 순위");
-                await context.PostAsync(Model.Rank.makeRanking(result1, context));
+                await context.PostAsync(Model.Rank.makeRanking(null, context));
             }
             context.Done("");
         }

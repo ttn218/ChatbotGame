@@ -29,14 +29,6 @@ namespace LionKing.Dialogs.Rank
 
         public async Task StartAsync(IDialogContext context)
         {
-            if( this.type == "initial")
-            {
-                if(this.level == "수도")
-                {
-                    this.level = "S";
-                }
-            }
-
             await context.PostAsync(strdata);
 
             context.Wait(MessageReceivedAsync);
@@ -52,9 +44,10 @@ namespace LionKing.Dialogs.Rank
                         new SqlParameter("@g_user", strdata),
                         new SqlParameter("@g_type", this.type),
                         new SqlParameter("@score", this.score),
-                        new SqlParameter("@g_level", this.level)
+                        new SqlParameter("@g_level", System.Data.SqlDbType.NVarChar)
                     };
 
+            para[3].Value = this.level;
             SQLHelper.ExecuteNonQuery("INSERT INTO ranking(g_user, g_type, score, g_level) " +
                                                 "VALUES(@g_user, @g_type, @score, @g_level)", para);
             
