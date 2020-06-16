@@ -155,7 +155,7 @@ namespace LionKing.Model
                 topic = result1.Where(v => v.glevel == strchar[i]).OrderByDescending(n => n.Score).ToList();
                 for (int j = 0; j < topic.Count && i < 7; j++)
                 {
-                    actions1.Add(new CardAction() { Title = (i + 1) + "등 / 닉네임 : " + topic[i].User + " / 점수 : " + topic[i].score, Value = "", Type = ActionTypes.PostBack });
+                    actions1.Add(new CardAction() { Title = (j + 1) + "등 / 닉네임 : " + topic[j].User + " / 점수 : " + topic[j].score, Value = "", Type = ActionTypes.PostBack });
                 }
                 Message.Attachments.Add(new HeroCard { Title = "초성왕" + strchar[i] + "순위", Buttons = actions1 }.ToAttachment());
             }
