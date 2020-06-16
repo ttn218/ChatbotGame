@@ -22,10 +22,11 @@ namespace LionKing.Dialogs.initialGame
         public async Task StartAsync(IDialogContext context)
         {
             var message = context.MakeMessage();
+            int index = 1;
             var actions = new List<CardAction>();
             foreach (string topic in Initial.TOPICS)
             {
-                actions.Add(new CardAction() { Title = "1." + topic, Value = topic , Type = ActionTypes.ImBack });
+                actions.Add(new CardAction() { Title = index++ + ". " + topic, Value = topic , Type = ActionTypes.ImBack });
             }
             message.Attachments.Add(new HeroCard { Title = strWelcomMMessage, Buttons = actions }.ToAttachment());
 
