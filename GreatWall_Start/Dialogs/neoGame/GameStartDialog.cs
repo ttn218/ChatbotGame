@@ -61,5 +61,21 @@ namespace LionKing.Dialogs.neoGame
             string score = await result;
             context.Call(new insertRankDialog(type, level, score), GameOver);
         }
+
+        private async Task GameOver(IDialogContext context, IAwaitable<string> result)
+        {
+            try
+            {
+                strMessage = "Your Score : " + await result;
+
+                await context.PostAsync(strMessage);
+
+                context.Done("Game Over");
+            }
+            catch (TooManyAttemptsException)
+            {
+                await context.PostAsync("Error occurred...");
+            }
+        }
     }
 }

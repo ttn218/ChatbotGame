@@ -49,13 +49,8 @@ namespace LionKing.Dialogs.Rank
                 await context.PostAsync("초성왕 순위");
                 await context.PostAsync(Model.Rank.makeRanking(result1, context));
             }
-
-            context.Wait(MessageReceivedAsync);
-        }
-
-        public async Task MessageReceivedAsync(IDialogContext context, IAwaitable<object> result)
-        {
             context.Done("");
         }
+
     }
 }
