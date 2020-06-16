@@ -13,7 +13,7 @@ namespace LionKing.Dialogs.neoGame
     public class NeoGameDialog : IDialog<string>
     {
         string type = "neo";
-        string manual = "2. neoGame (신조어 게임)" + Environment.NewLine
+        string manual = "neoGame (신조어 게임)" + Environment.NewLine
                         + "아재왕! 게임은 제시되는 설명을 읽고, 해당 뜻이 의미하는 신조어를 맞추는 게임입니다." + Environment.NewLine + Environment.NewLine
                         + "제한 시간은 300초이며, 시간 내에 가능한 한 많은 문제를 맞혀 높은 점수를 따내면 되는 게임입니다." + Environment.NewLine
 

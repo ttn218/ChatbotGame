@@ -13,7 +13,7 @@ namespace LionKing.Dialogs.initialGame
     public class initialGameDialog : IDialog<string>
     {
         string type = "initial";
-        string manual = "3. initialGame (초성 게임)" + Environment.NewLine
+        string manual = "initialGame (초성 게임)" + Environment.NewLine
                         + "초성왕! 게임은 주어진 주제 중, 한 가지 주제를 선택하여 게임을 시작합니다." + Environment.NewLine + Environment.NewLine
                         + "제한 시간은 300초이며, 시간 내에 가능한 한 많은 문제를 맞혀 높은 점수를 따내면 되는 게임입니다." + Environment.NewLine
 

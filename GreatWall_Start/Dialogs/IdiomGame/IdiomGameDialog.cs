@@ -14,7 +14,7 @@ namespace LionKing.Dialogs.IdiomGame
     public class IdiomGameDialog : IDialog<string>
     {
         string type = "idome";
-        string manual = "1. IdiomGame (사자성어 게임)" + Environment.NewLine
+        string manual = "IdiomGame (사자성어 게임)" + Environment.NewLine
                         + "사자왕! 게임은 제시되는 설명을 읽고, 해당 뜻이 의미하는 사자성어를 맞추는 게임입니다." + Environment.NewLine + Environment.NewLine
                         + "제한 시간은 300초이며, 시간 내에 가능한 한 많은 문제를 맞혀 높은 점수를 따내면 되는 게임입니다." + Environment.NewLine
                         
