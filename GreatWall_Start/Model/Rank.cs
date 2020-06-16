@@ -143,7 +143,7 @@ namespace LionKing.Model
         {
             Message = context.MakeMessage();
 
-            List<CardAction> actions1 = new List<CardAction>();
+            List<CardAction> actions = new List<CardAction>();
             
             var result1 = Model.Rank.Ranks.Where(n => (n.Gtype.Trim() == "initial")).OrderByDescending(n => n.Score).ToList();
             int Count = result1.Select(v => v.Glevel).Distinct().Count();
@@ -153,11 +153,12 @@ namespace LionKing.Model
             for (int i = 0; i<Count; i++)
             {
                 topic = result1.Where(v => v.glevel == strchar[i]).OrderByDescending(n => n.Score).ToList();
+                actions = new List<CardAction>();
                 for (int j = 0; j < topic.Count && i < 7; j++)
                 {
-                    actions1.Add(new CardAction() { Title = (j + 1) + "등 / 닉네임 : " + topic[j].User + " / 점수 : " + topic[j].score, Value = "", Type = ActionTypes.PostBack });
+                    actions.Add(new CardAction() { Title = (j + 1) + "등 / 닉네임 : " + topic[j].User + " / 점수 : " + topic[j].score, Value = "", Type = ActionTypes.PostBack });
                 }
-                Message.Attachments.Add(new HeroCard { Title = "초성왕" + strchar[i] + "순위", Buttons = actions1 }.ToAttachment());
+                Message.Attachments.Add(new HeroCard { Title = "초성왕" + strchar[i] + "순위", Buttons = actions }.ToAttachment());
             }
 
             Message.AttachmentLayout = "carousel";
