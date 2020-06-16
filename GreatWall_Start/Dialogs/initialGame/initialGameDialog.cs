@@ -13,6 +13,14 @@ namespace LionKing.Dialogs.initialGame
     public class initialGameDialog : IDialog<string>
     {
         string type = "initial";
+        string manual = "3. initialGame (초성 게임)" + Environment.NewLine
+                        + "초성왕! 게임은 주어진 주제 중, 한 가지 주제를 선택하여 게임을 시작합니다." + Environment.NewLine + Environment.NewLine
+                        + "제한 시간은 300초이며, 시간 내에 가능한 한 많은 문제를 맞혀 높은 점수를 따내면 되는 게임입니다." + Environment.NewLine
+
+                        + "주제는 [나라 수도 맞추기]와 [동물 이름 맞추기] 두 가지로 구성됩니다." + Environment.NewLine
+                        + "[나라 수도 맞추기]는 제시된 나라의 수도와 초성 단어를 보고 정답을 유추하여 맞추면 됩니다." + Environment.NewLine
+                        + "[동물 이름 맞추기]는 제시된 동물의 설명과 초성 단어를 보고 정답을 유추하여 맞추면 됩니다." + Environment.NewLine
+                        + "모든 문제는 주관식으로 출제됩니다.";
 
         public async Task StartAsync(IDialogContext context)
         {
@@ -39,6 +47,11 @@ namespace LionKing.Dialogs.initialGame
             if (strSelected == "게임시작")
             {
                 context.Call(new GameStartDialog(), DialogResumeAfter);
+            }
+            else if (strSelected == "게임설명")
+            {
+                await context.PostAsync(manual);
+                await StartAsync(context);
             }
             else if (strSelected == "랭킹")
             {
