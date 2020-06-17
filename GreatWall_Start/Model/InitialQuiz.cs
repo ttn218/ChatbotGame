@@ -71,8 +71,8 @@ namespace LionKing.Model
             var actions = new List<CardAction>();
             InitialQuizValue value = Quizzes.ElementAt(index) as InitialQuizValue;
             strdata = "맞춰라! 초성퀴즈~ " + Environment.NewLine + "초성 : " + value.initial + " 주제 : " + this.topic;
-            Message.Attachments.Add(new HeroCard { Title = "Hint : " + value.meaning }.ToAttachment());
-
+            Message.Text = "Hint " + Environment.NewLine + value.meaning;
+            Message.Locale = "UTF-8";
             strMessage = strdata;
             return Message;
         }
